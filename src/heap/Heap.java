@@ -12,8 +12,6 @@ import java.util.Stack;
 public class Heap implements MyHeap {
   private int size;
   private Node root;
-  private Node tail;
-  private int height;
 
   /*
    * (non-Javadoc)
@@ -23,7 +21,6 @@ public class Heap implements MyHeap {
   @Override
   public Node makeHeap(Comparable value) {
     size = 1;
-    height = 0;
     root = new Node(value);
     return root;
   }
@@ -49,7 +46,6 @@ public class Heap implements MyHeap {
     if (root == null) {
       root = newNode;
     } else {
-
       Node parent = getTail();
       if (parent.getLeftChild() == null) {
         parent.setLeftChild(newNode);
@@ -57,6 +53,7 @@ public class Heap implements MyHeap {
         parent.setRightChild(newNode);
       }
       siftUp(newNode);
+      size++;
     }
 
 
@@ -118,10 +115,6 @@ public class Heap implements MyHeap {
       return root.getData();
     else
       return null;
-  }
-
-  private boolean lastLevelFull() {
-    return size == Math.pow(2, height);
   }
 
   /**
