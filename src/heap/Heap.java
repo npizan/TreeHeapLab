@@ -3,19 +3,27 @@
  */
 package heap;
 
+import java.util.Stack;
+
 /**
  * @author grahamw0
  *
  */
 public class Heap implements MyHeap {
+  private int size;
+  private Node root;
+  private Node tail;
+  private int height;
 
   /* (non-Javadoc)
    * @see heap.MyHeap#makeHeap(java.lang.Comparable)
    */
   @Override
   public Node makeHeap(Comparable value) {
-    // TODO Auto-generated method stub
-    return null;
+    size = 1;
+    height = 0;
+    root = new Node(value);
+    return root;
   }
 
   /* (non-Javadoc)
@@ -23,8 +31,7 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean isEmpty() {
-    // TODO Auto-generated method stub
-    return false;
+    return size == 0;
   }
 
   /* (non-Javadoc)
@@ -77,8 +84,31 @@ public class Heap implements MyHeap {
    */
   @Override
   public Comparable findMin() {
-    // TODO Auto-generated method stub
-    return null;
+    if (root != null)
+      return root.getData();
+    else
+      return null;
+  }
+  
+  private boolean lastLevelFull() {
+    return size == Math.pow(2, height);
+  }
+  
+  private Node getTail() {
+    String bin = Integer.toBinaryString(size+1);
+    bin = bin.substring(1, bin.length()-1);
+    
+    Node current = root;
+    for(int i = bin.length() - 1; i >= 0; i--) {
+      if (bin.charAt(i) == '0') {
+        current = current.getLeftChild();
+      }
+      else {
+        current = current.getRightChild();
+      }
+    }
+    return current;
+    
   }
 
 }
