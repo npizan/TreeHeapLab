@@ -15,7 +15,9 @@ public class Heap implements MyHeap {
   private Node tail;
   private int height;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#makeHeap(java.lang.Comparable)
    */
   @Override
@@ -26,7 +28,9 @@ public class Heap implements MyHeap {
     return root;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#isEmpty()
    */
   @Override
@@ -34,7 +38,9 @@ public class Heap implements MyHeap {
     return size == 0;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#insert(java.lang.Comparable)
    */
   @Override
@@ -43,7 +49,9 @@ public class Heap implements MyHeap {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#deleteMin()
    */
   @Override
@@ -52,7 +60,9 @@ public class Heap implements MyHeap {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#decreaseKey(heap.Node, java.lang.Comparable)
    */
   @Override
@@ -61,7 +71,9 @@ public class Heap implements MyHeap {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#delete(heap.Node)
    */
   @Override
@@ -70,7 +82,9 @@ public class Heap implements MyHeap {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#union(heap.MyHeap)
    */
   @Override
@@ -79,7 +93,9 @@ public class Heap implements MyHeap {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see heap.MyHeap#findMin()
    */
   @Override
@@ -89,26 +105,29 @@ public class Heap implements MyHeap {
     else
       return null;
   }
-  
+
   private boolean lastLevelFull() {
     return size == Math.pow(2, height);
   }
-  
+
+  /**
+   * Returns parent of open space to add/remove from (remove?)
+   * @return
+   */
   private Node getTail() {
-    String bin = Integer.toBinaryString(size+1);
-    bin = bin.substring(1, bin.length()-1);
-    
+    String bin = Integer.toBinaryString(size + 1);
+    bin = bin.substring(1, bin.length() - 1);
+
     Node current = root;
-    for(int i = bin.length() - 1; i >= 0; i--) {
+    for (int i = bin.length() - 1; i >= 0; i--) {
       if (bin.charAt(i) == '0') {
         current = current.getLeftChild();
-      }
-      else {
+      } else {
         current = current.getRightChild();
       }
     }
     return current;
-    
+
   }
 
 }
