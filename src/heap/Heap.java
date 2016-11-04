@@ -45,8 +45,22 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean insert(Comparable value) {
-    // TODO Auto-generated method stub
-    return false;
+    Node newNode = new Node(value);
+    if (root == null) {
+      root = newNode;
+    } else {
+
+      Node parent = getTail();
+      if (parent.getLeftChild() == null) {
+        parent.setLeftChild(newNode);
+      } else {
+        parent.setRightChild(newNode);
+      }
+      siftUp(newNode);
+    }
+
+
+    return true;
   }
 
   /*
@@ -112,6 +126,7 @@ public class Heap implements MyHeap {
 
   /**
    * Returns parent of open space to add/remove from (remove?)
+   * 
    * @return
    */
   private Node getTail() {
@@ -128,6 +143,15 @@ public class Heap implements MyHeap {
     }
     return current;
 
+  }
+
+  private void siftUp(Node n) {
+    Node current = n;
+    while (current != root && current.getData().compareTo(current.getParent().getData()) <= 0) {
+      Comparable temp = current.getData();
+      current.setData(current.getParent().getData());
+      current.getParent().setData(temp);
+    }
   }
 
 }
