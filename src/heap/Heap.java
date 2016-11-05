@@ -46,17 +46,16 @@ public class Heap implements MyHeap {
     if (root == null) {
       root = newNode;
     } else {
-      Node parent = getTail();
+      Node parent = getInsertParent();
       if (parent.getLeftChild() == null) {
         parent.setLeftChild(newNode);
       } else {
         parent.setRightChild(newNode);
       }
+      newNode.setParent(parent);
       siftUp(newNode);
-      size++;
     }
-
-
+    size++;
     return true;
   }
 
@@ -67,8 +66,23 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean deleteMin() {
-    // TODO Auto-generated method stub
-    return false;
+    if (root == null) {
+      return false;
+    }
+    Node last = getLast();
+    swapData(root, last);
+
+    // Delete the last child which now holds the old min value
+    if (size % 2 == 0) { // If size is even, the last added child is a left child. Right if odd.
+      last.getParent().setLeftChild(null);
+    } else {
+      last.getParent().setRightChild(null);
+    }
+
+    siftDown(root);
+
+
+    return true;
   }
 
   /*
@@ -122,7 +136,7 @@ public class Heap implements MyHeap {
    * 
    * @return
    */
-  private Node getTail() {
+  private Node getInsertParent() {
     String bin = Integer.toBinaryString(size + 1);
     bin = bin.substring(1, bin.length() - 1);
 
@@ -138,13 +152,49 @@ public class Heap implements MyHeap {
 
   }
 
+  private Node getLast() {
+    String bin = Integer.toBinaryString(size);
+    bin = bin.substring(1);
+
+    Node current = root;
+    for (int i = bin.length() - 1; i >= 0; i--) {
+      if (bin.charAt(i) == '0') {
+        current = current.getLeftChild();
+      } else {
+        current = current.getRightChild();
+      }
+    }
+    return current;
+  }
+
   private void siftUp(Node n) {
     Node current = n;
     while (current != root && current.getData().compareTo(current.getParent().getData()) <= 0) {
-      Comparable temp = current.getData();
-      current.setData(current.getParent().getData());
-      current.getParent().setData(temp);
+      swapData(current, current.getParent());
     }
+  }
+
+  private void siftDown(Node n) {
+    Node current = n;
+    boolean continueSift = true;
+    while(continueSift) {
+      if (current.getLeftChild() == null && current.getRightChild() == null) {
+        continueSift = false;
+      }
+      else if (current.)
+    }
+  }
+
+  /**
+   * Swaps the data of two Nodes.
+   * 
+   * @param a first node to swap
+   * @param b second node to swap
+   */
+  private void swapData(Node a, Node b) {
+    Comparable temp = a.getData();
+    a.setData(b.getData());
+    b.setData(temp);
   }
 
 }
