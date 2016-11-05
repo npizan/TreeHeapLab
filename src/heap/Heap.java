@@ -74,14 +74,14 @@ public class Heap implements MyHeap {
 
     // Delete the last child which now holds the old min value
     if (size % 2 == 0) { // If size is even, the last added child is a left child. Right if odd.
-      last.getParent().setLeftChild(null);
+      last.getParent().setLeftChild(null); // Use the children to kill themselves
     } else {
       last.getParent().setRightChild(null);
     }
 
     siftDown(root);
 
-
+    size--;
     return true;
   }
 
@@ -171,18 +171,47 @@ public class Heap implements MyHeap {
     Node current = n;
     while (current != root && current.getData().compareTo(current.getParent().getData()) <= 0) {
       swapData(current, current.getParent());
+      current = current.getParent();
     }
   }
 
   private void siftDown(Node n) {
     Node current = n;
     boolean continueSift = true;
-    while(continueSift) {
-      if (current.getLeftChild() == null && current.getRightChild() == null) {
+    while (continueSift) {
+      if (current.getLeftChild() == null && current.getRightChild() == null) { // No children
         continueSift = false;
+      } else if (current.getLeftChild() != null && current.getRightChild() != null) { // Two child
+        Node child;
+        if (current.getLeftChild().getData().compareTo(current.getLeftChild().getData()) <= 0)
+          child = current.getLeftChild();
+        else
+          child = current.getRightChild();
+
+        if (current.getData().compareTo(child.getData()) > 0) {
+          swapData(current, child);
+          current = child;
+        } else {
+          continueSift = false;
+        }
+
+
+      } else { // One child
+        Node child;
+        if (current.getLeftChild() != null)
+          child = current.getLeftChild();
+        else
+          child = current.getRightChild();
+
+        if (current.getData().compareTo(child.getData()) > 0) {
+          swapData(current, child);
+          current = child;
+        } else {
+          continueSift = false;
+        }
       }
-      else if (current.)
     }
+
   }
 
   /**
