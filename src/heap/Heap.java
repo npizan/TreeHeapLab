@@ -92,8 +92,14 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean decreaseKey(Node key, Comparable updateValue) {
-    // TODO Auto-generated method stub
-    return false;
+    if(key.getData().compareTo(updateValue) > 0) {
+      key.setData(updateValue);
+      siftUp(key);
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   /*
@@ -103,8 +109,20 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean delete(Node del) {
-    // TODO Auto-generated method stub
-    return false;
+    if (root == null)
+      return false;
+
+    Node last = getLast();
+    swapData(del, last);
+    if (size % 2 == 0) { // If size is even, the last added child is a left child. Right if odd.
+      last.getParent().setLeftChild(null); // Use the children to kill themselves
+    } else {
+      last.getParent().setRightChild(null);
+    }
+
+    siftDown(del);
+    size--;
+    return true;
   }
 
   /*
@@ -114,8 +132,12 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean union(MyHeap heap) {
-    // TODO Auto-generated method stub
-    return false;
+    while (!heap.isEmpty()) {
+      insert(heap.findMin());
+      heap.deleteMin();
+    }
+    return true;
+    
   }
 
   /*
