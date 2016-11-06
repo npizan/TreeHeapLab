@@ -80,10 +80,11 @@ public class Heap implements MyHeap {
     } else {
       last.getParent().setRightChild(null);
     }
+    size--;
 
     siftDown(root);
 
-    size--;
+    //size--;
     return true;
   }
 
@@ -181,7 +182,7 @@ public class Heap implements MyHeap {
     bin = bin.substring(1);
 
     Node current = root;
-    for (int i = bin.length() - 1; i >= 0; i--) {
+    for (int i = 0; i < bin.length(); i++) {
       if (bin.charAt(i) == '0') {
         current = current.getLeftChild();
       } else {
@@ -207,7 +208,7 @@ public class Heap implements MyHeap {
         continueSift = false;
       } else if (current.getLeftChild() != null && current.getRightChild() != null) { // Two child
         Node child;
-        if (current.getLeftChild().getData().compareTo(current.getLeftChild().getData()) <= 0)
+        if (current.getLeftChild().getData().compareTo(current.getRightChild().getData()) <= 0)
           child = current.getLeftChild();
         else
           child = current.getRightChild();
