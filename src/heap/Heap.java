@@ -3,6 +3,8 @@
  */
 package heap;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -247,5 +249,20 @@ public class Heap implements MyHeap {
     a.setData(b.getData());
     b.setData(temp);
   }
+  
+  public void print() {
+    Queue<Node> queue = new LinkedList<Node>() ;
+    if (root == null)
+        return;
+    queue.clear();
+    queue.add(root);
+    while(!queue.isEmpty()){
+        Node node = queue.remove();
+        System.out.print(node.getData() + " ");
+        if(node.getLeftChild() != null) queue.add(node.getLeftChild());
+        if(node.getRightChild() != null) queue.add(node.getRightChild());
+    }
+
+}
 
 }
