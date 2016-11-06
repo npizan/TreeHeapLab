@@ -10,6 +10,11 @@ public class Driver {
     heap.insert(8);
     heap.insert(10);
     heap.insert(666);
+    
+    heap.print();
+    
+    heap.deleteMin();
+    System.out.println();
     heap.print();
 
   }
