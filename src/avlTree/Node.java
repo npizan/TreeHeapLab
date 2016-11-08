@@ -9,8 +9,8 @@ package avlTree;
  */
 public class Node implements Comparable<Node> {
   private Node parent;
-  private Node leftChild;
-  private Node rightChild;
+  public Node leftChild;
+  public Node rightChild;
   private Comparable data;
 
 
@@ -100,6 +100,10 @@ public class Node implements Comparable<Node> {
   @Override
   public int compareTo(Node o) {
     return data.compareTo(o.getData());
+  }
+  
+  public String toString(){
+    return data.toString();
   }
 
 }
