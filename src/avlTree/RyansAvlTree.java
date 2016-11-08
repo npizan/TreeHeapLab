@@ -7,34 +7,38 @@ public class RyansAvlTree {
   }
 
   public Node insertNode(Node root, Comparable value) {
-    if (root == null) {
+    if (root == null) { // If the tree is empty
       Node newNode = new Node(value);
       root = newNode;
       return root;
-    }
-    if (root.getData().compareTo(value) < 0) {
-      root.rightChild = insertNode(root.rightChild, value);
+    } 
+    
+    // if the root is less than the new value return a -1 and move right
+    if (root.getData().compareTo(value) < 0) { 
+      root.rightChild = insertNode(root.rightChild, value); // go right 
     } else {
-      root.leftChild = insertNode(root.leftChild, value);
+      root.leftChild = insertNode(root.leftChild, value); // go left
     }
+    
+    // Check the balance of the tree
     int balance = balance(root.leftChild, root.rightChild);
-    if(balance > 1){
-      if(height(root.leftChild.leftChild) >= height(root.leftChild.rightChild)){
+    if(balance > 1){ // if the tree is unbalanced
+      if(height(root.leftChild.leftChild) >= height(root.leftChild.rightChild)){ // This is the LL
         root = rightRotate(root);
       } else {
-        root.leftChild = leftRotate(root.leftChild);
+        root.leftChild = leftRotate(root.leftChild); // This is the LR
         root = rightRotate(root);
       }
     } else if(balance < -1) {
-      if(height(root.rightChild.rightChild) >= height(root.rightChild.leftChild)){
+      if(height(root.rightChild.rightChild) >= height(root.rightChild.leftChild)){ //This is the RR
         root = leftRotate(root);
       } else {
-        root.rightChild = rightRotate(root.rightChild);
+        root.rightChild = rightRotate(root.rightChild); // This is the RL
         root = leftRotate(root);
       }
     }
-    else {
-      root.height = setHeight(root);
+    else { // keep track of the height and size
+      root.height = setHeight(root); 
       root.size = setSize(root);
     }
     return root;
@@ -70,13 +74,34 @@ public class RyansAvlTree {
     return newRoot;
   }
   
+  /**
+   * 
+   */
+  public boolean search(Node root, Comparable value) {
+    Node currentNode = root;
+    boolean isInTree = true;
+    while(currentNode.getData().compareTo(value) != 0){ //search until there's a match
+      if(value.compareTo(root.getData()) < 0){
+        currentNode = currentNode.leftChild;
+      } else {
+        currentNode = currentNode.rightChild;
+      }
+      if(currentNode == null)
+        isInTree = false;
+    }
+    return isInTree;
+  }
   
+  
+  /**
+   * 
+   * @param currentNode
+   */
   public void inOrderTraverseTree(Node currentNode) {
     if (currentNode != null) {
       inOrderTraverseTree(currentNode.leftChild);
       System.out.println(currentNode);
       inOrderTraverseTree(currentNode.rightChild);
-
     }
   }
   
