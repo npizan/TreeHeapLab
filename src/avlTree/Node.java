@@ -12,6 +12,8 @@ public class Node implements Comparable<Node> {
   public Node leftChild;
   public Node rightChild;
   private Comparable data;
+  int height;
+  int size;
 
 
 
@@ -21,11 +23,13 @@ public class Node implements Comparable<Node> {
    * @param rightChild
    * @param data
    */
-  public Node(Node parent, Node leftChild, Node rightChild, Comparable data) {
+  public Node(Node parent, Node leftChild, Node rightChild, Comparable data, int height, int size) {
     this.parent = parent;
     this.leftChild = leftChild;
     this.rightChild = rightChild;
     this.data = data;
+    this.height = height;
+    this.size = size;
   }
 
   /**
@@ -96,7 +100,21 @@ public class Node implements Comparable<Node> {
   public void setData(Comparable data) {
     this.data = data;
   }
-
+  
+  /**
+   * 
+   */
+  public void setHeight(int height){
+    this.height = height;
+  }
+  
+  /**
+   * 
+   */
+  public int getHeight(){
+    return height;
+  }
+  
   @Override
   public int compareTo(Node o) {
     return data.compareTo(o.getData());

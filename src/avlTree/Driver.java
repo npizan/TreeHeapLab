@@ -17,14 +17,19 @@ public class Driver {
 
     RyansAvlTree avl = new RyansAvlTree();
     
-    avl.insertNode(10);
-    avl.insertNode(38);
-    avl.insertNode(55);
-    avl.insertNode(666);
-    avl.insertNode(2);
-    avl.insertNode(12);
+    Node root = null;
+    root = avl.insertNode(root, 10);
+    root = avl.insertNode(root, 38);
+    root = avl.insertNode(root, 55);
+    root = avl.insertNode(root, 666);
+    root = avl.insertNode(root, 2);
+    root = avl.insertNode(root, 420);
+    root = avl.insertNode(root, 32);
+    root = avl.insertNode(root, 18);
+    root = avl.insertNode(root, 4);
+    root = avl.insertNode(root, 22);
     
-    avl.inOrderTraverseTree(avl.root);
+    avl.inOrderTraverseTree(root);
   }
 
 }
