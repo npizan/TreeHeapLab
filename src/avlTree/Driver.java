@@ -26,6 +26,8 @@ public class Driver {
     System.out.println("This is the first tree. ");
     System.out.println();
     avl.inOrderTraverseTree(root);
+    System.out.println("The new root of the tree is " + root.getData() + 
+        " + with a height of " + root.height);
     
     root = avl.insertNode(root, 2);
     root = avl.insertNode(root, 420);
@@ -36,11 +38,14 @@ public class Driver {
     System.out.println();
     System.out.println("This is the updated tree. ");
     avl.inOrderTraverseTree(root);
+    System.out.println("The new root of the tree is " + root.getData() + 
+        " + with a height of " + root.height);
+    //System.out.println(root.leftChild.rightChild.rightChild.getData());
     
     System.out.println();
     System.out.println("");
     
-    System.out.println(avl.search(root, 1));
+    System.out.println(avl.search(root, 420));
     
   }
 

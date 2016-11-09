@@ -89,6 +89,12 @@ public class RyansAvlTree {
         found = true;
       }
     }
+    if(found){
+      System.out.println(value + " is definitely in the tree.  :)");
+    }
+    else{
+      System.out.println(value + " was NOT found in the tree");
+    }
     return found;
   }
   
@@ -153,7 +159,4 @@ public class RyansAvlTree {
       return root.getHeight();
     }
   }
-  
-  
-  
 }
