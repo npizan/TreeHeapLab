@@ -79,17 +79,17 @@ public class RyansAvlTree {
    */
   public boolean search(Node root, Comparable value) {
     Node currentNode = root;
-    boolean isInTree = true;
-    while(currentNode.getData().compareTo(value) != 0){ //search until there's a match
-      if(value.compareTo(root.getData()) < 0){
+    boolean found = false;
+    while(currentNode != null && !found){
+      if(value.compareTo(currentNode.getData()) < 0){
         currentNode = currentNode.leftChild;
-      } else {
+      } else if(value.compareTo(currentNode.getData()) > 0){
         currentNode = currentNode.rightChild;
+      } else {
+        found = true;
       }
-      if(currentNode == null)
-        isInTree = false;
     }
-    return isInTree;
+    return found;
   }
   
   

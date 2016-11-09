@@ -40,7 +40,7 @@ public class Driver {
     System.out.println();
     System.out.println("");
     
-    //System.out.println(avl.search(root, 15));
+    System.out.println(avl.search(root, 1));
     
   }
 
