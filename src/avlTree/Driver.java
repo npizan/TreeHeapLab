@@ -15,7 +15,7 @@ public class Driver {
   public static void main(String[] args) {
     // TODO Auto-generated method stub
 
-    RyansAvlTree avl = new RyansAvlTree();
+    /*RyansAvlTree avl = new RyansAvlTree();
     
     Node root = null;
     root = avl.insertNode(root, 10);
@@ -45,7 +45,15 @@ public class Driver {
     System.out.println();
     System.out.println("");
     
-    System.out.println(avl.search(root, 420));
+    System.out.println(avl.search(root, 420));*/
+    
+    NewTree test = new NewTree();
+    test.insert(666);
+    test.insert(1);
+    test.insert(10);
+    test.insert(-1);
+    test.printInOrder(test.getRoot());
+    System.out.println(test.search(66));
     
   }
 
