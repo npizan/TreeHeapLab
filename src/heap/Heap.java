@@ -71,6 +71,11 @@ public class Heap implements MyHeap {
     if (root == null) {
       return false;
     }
+    if(size == 1) {
+      root = null;
+      size--;
+      return true;
+    }
     Node last = getLast();
     swapData(root, last);
 
@@ -84,7 +89,7 @@ public class Heap implements MyHeap {
 
     siftDown(root);
 
-    //size--;
+    // size--;
     return true;
   }
 
@@ -95,12 +100,11 @@ public class Heap implements MyHeap {
    */
   @Override
   public boolean decreaseKey(Node key, Comparable updateValue) {
-    if(key.getData().compareTo(updateValue) > 0) {
+    if (key.getData().compareTo(updateValue) > 0) {
       key.setData(updateValue);
       siftUp(key);
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -140,7 +144,7 @@ public class Heap implements MyHeap {
       heap.deleteMin();
     }
     return true;
-    
+
   }
 
   /*
@@ -220,7 +224,6 @@ public class Heap implements MyHeap {
           continueSift = false;
         }
 
-
       } else { // One child
         Node child;
         if (current.getLeftChild() != null)
@@ -250,20 +253,22 @@ public class Heap implements MyHeap {
     a.setData(b.getData());
     b.setData(temp);
   }
-  
+
   public void print() {
-    Queue<Node> queue = new LinkedList<Node>() ;
+    Queue<Node> queue = new LinkedList<Node>();
     if (root == null)
-        return;
+      return;
     queue.clear();
     queue.add(root);
-    while(!queue.isEmpty()){
-        Node node = queue.remove();
-        System.out.print(node.getData() + " ");
-        if(node.getLeftChild() != null) queue.add(node.getLeftChild());
-        if(node.getRightChild() != null) queue.add(node.getRightChild());
+    while (!queue.isEmpty()) {
+      Node node = queue.remove();
+      System.out.print(node.getData() + " ");
+      if (node.getLeftChild() != null)
+        queue.add(node.getLeftChild());
+      if (node.getRightChild() != null)
+        queue.add(node.getRightChild());
     }
 
-}
+  }
 
 }

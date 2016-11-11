@@ -3,20 +3,27 @@ package heap;
 public class Driver {
 
   public static void main(String[] args) {
-    Heap heap = new Heap();
-    heap.makeHeap(6);
-    heap.insert(12);
-    heap.insert(7);
-    heap.insert(8);
-    heap.insert(10);
-    heap.insert(666);
+    Heap heap1 = new Heap();
+    heap1.makeHeap(6);
+    heap1.insert(12);
+    heap1.insert(7);
+    heap1.insert(8);
+    heap1.insert(10);
+    heap1.insert(666);
+    //heap1.print();
+    /*heap1.insert(2389);
+    heap1.insert(74);
+    heap1.insert(23);
+    heap1.print();*/
     
-    heap.print();
+    Heap heap2 = new Heap();
+    heap2.makeHeap(2389);
+    heap2.insert(74);
+    heap2.insert(23);
+    //heap2.print();
     
-    heap.deleteMin();
-    System.out.println();
-    heap.print();
-
+    heap1.union(heap2);
+    heap1.print();
   }
 
 }

@@ -53,7 +53,7 @@ public class Driver {
     test.insert(10);
     test.insert(-1);
     test.printInOrder(test.getRoot());
-    System.out.println(test.search(66));
+    System.out.println(test.search(-1));
     
   }
 
