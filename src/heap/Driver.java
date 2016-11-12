@@ -11,9 +11,9 @@ public class Driver {
     heap1.insert(10);
     heap1.insert(666);
     //heap1.print();
-    /*heap1.insert(2389);
+    /*heap1.insert(23);
     heap1.insert(74);
-    heap1.insert(23);
+    heap1.insert(2389);
     heap1.print();*/
     
     Heap heap2 = new Heap();
