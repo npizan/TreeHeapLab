@@ -1,5 +1,10 @@
 package avlTree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
+import heap.Node;
+
 /**
  * @author grahamw0
  *
@@ -90,25 +95,48 @@ public class NewTree {
     return rotateWithRightChild(node);
   }
   
-  public boolean search(Comparable data) {
-    NewNode current = root;
-    boolean found = false;
-    while(current != null && !found) {
-      if(data.compareTo(current.getData()) < 0) {
-        current = current.getLeft();
-      }
-      else if (data.compareTo(current.getData()) > 0) {
-        current = current.getRight();
-      }
-      else {
-        found = true;
-      }
+  public boolean remove(Comparable data) {
+    if(root == null)
+      return false;
+    NewNode delNode = search(data);
+    if(delNode == null)
+      return false;
+    if(delNode.getLeft() == null && delNode.getRight() == null) {
+      delNode.g
     }
     
-    return found;
+    return true;
   }
   
-  public void printInOrder(NewNode node) {
+  public NewNode search(Comparable data) {
+    NewNode current = root;
+    while(current != null) {
+      if (current.getData().compareTo(data) == 0)
+        return current;
+      if(current.getData().compareTo(data) < 0)
+        current = current.getRight();
+      else
+        current = current.getLeft();
+    }
+    return null;
+  }
+  
+  /**
+   * Fancy version of search- do later
+   * @param tree
+   * @param data
+   * @return
+   */
+  public boolean search(NewTree tree, Comparable data) {
+   //TODO: Finish this
+    return false;
+  }
+  
+  public void printInOrder() {
+    printInOrder(root);
+  }
+  
+  private void printInOrder(NewNode node) {
     if(node != null) {
       printInOrder(node.getLeft());
       System.out.print(node.getData() + " ");
@@ -118,6 +146,23 @@ public class NewTree {
   
   public NewNode getRoot() {
     return root;
+  }
+  
+  public void print() {
+    Queue<NewNode> queue = new LinkedList<NewNode>();
+    if (root == null)
+      return;
+    queue.clear();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+      NewNode node = queue.remove();
+      System.out.print(node.getData() + " ");
+      if (node.getLeft() != null)
+        queue.add(node.getLeft());
+      if (node.getRight() != null)
+        queue.add(node.getRight());
+    }
+
   }
 
 }
