@@ -102,7 +102,7 @@ public class NewTree {
     if(delNode == null)
       return false;
     if(delNode.getLeft() == null && delNode.getRight() == null) {
-      delNode.g
+      //delNode.g
     }
     
     return true;
