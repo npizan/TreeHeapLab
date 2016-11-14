@@ -47,7 +47,7 @@ public class Driver {
     
     System.out.println(avl.search(root, 420));*/
     
-    NewTree test = new NewTree();
+    /*NewTree test = new NewTree();
     test.insert(666);
     test.insert(4);
     test.insert(10);
@@ -61,7 +61,20 @@ public class Driver {
     //test.printInOrder();
     System.out.println(test.search(20).getData());
     //test.printInOrder(test.getRoot());
-    //System.out.println(test.search(-1));
+    //System.out.println(test.search(-1));*/
+    
+    AvlTree test = new AvlTree();
+    test.insert(666);
+    test.insert(4);
+    test.insert(10);
+    test.insert(3);
+    test.insert(2);
+    test.insert(667);
+    test.insert(20);
+    test.insert(100);
+    test.insert(101);
+    test.remove(20);
+    test.inOrderPrint();
     
   }
 
