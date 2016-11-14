@@ -34,49 +34,122 @@ public class AvlTree {
     if (node1 == null) {
       root = node2;
     } else {
-
+      if (node2.getData().compareTo(node1.getData()) < 0) {
+        if (node1.getLeft() == null) {
+          node1.setLeft(node2);
+          node2.setParent(node1);
+          recursiveBalance(node1);
+        } else {
+          insertAVL(node1.getLeft(), node2);
+        }
+      } else if (node2.getData().compareTo(node1.getData()) > 0) {
+        if (node1.getRight() == null) {
+          node1.setRight(node2);
+          node2.setParent(node1);
+          recursiveBalance(node1);
+        } else {
+          insertAVL(node1.getRight(), node2);
+        }
+      }
     }
   }
-  
+
+  public void remove(Comparable data) {
+    AvlNode toRemove = search(root, data);
+    if (toRemove != null)
+      removeNode(toRemove);
+  }
+
+  private AvlNode search(AvlNode node, Comparable data) {
+    if (node == null) {
+      return null;
+    } else if (data.compareTo(node.getData()) < 0) {
+      return search(node.getLeft(), data);
+    } else if (data.compareTo(node.getData()) > 0) {
+      return search(node.getRight(), data);
+    } else {
+      return node;
+    }
+
+  }
+
+  private void removeNode(AvlNode node) {
+    AvlNode r;
+
+    if (node.getLeft() == null || node.getRight() == null) {
+      if (node.getParent() == null) { // Root is being deleted
+        root = null;
+        node = null;
+        return;
+      }
+      r = node;
+    } else {
+      r = successor(node);
+      node.setData(r.getData());
+    }
+
+    AvlNode p;
+    if (r.getLeft() != null) {
+      p = r.getLeft();
+    } else {
+      p = r.getRight();
+    }
+
+    if (p != null) {
+      p.setParent(r.getParent());
+    }
+
+    if (r.getParent() == null) {
+      root = p;
+    } else {
+      if (r == r.getParent().getLeft())
+        r.getParent().setLeft(p);
+      else
+        r.getParent().setRight(p);
+      recursiveBalance(r.getParent());
+    }
+    r = null;
+  }
+
   private void recursiveBalance(AvlNode node) {
     setBalance(node);
     int balance = node.getBalance();
-    
-    if(balance == -2) {
-      if(height(node.getLeft().getLeft()) >= height(node.getLeft().getRight())) {
+
+    if (balance == -2) {
+      if (height(node.getLeft().getLeft()) >= height(node.getLeft().getRight())) {
         node = rotateRight(node);
       } else {
         node = doubleRotateLeftRight(node);
       }
     } else if (balance == 2) {
-      if(height(node.getRight().getRight()) >= height(node.getRight().getLeft())) {
+      if (height(node.getRight().getRight()) >= height(node.getRight().getLeft())) {
         node = rotateLeft(node);
       } else {
         node = doubleRotateRightLeft(node);
       }
     }
-    
-    if(node.getParent() != null) {
+
+    if (node.getParent() != null) {
       recursiveBalance(node.getParent());
     } else {
       this.root = node;
-      System.out.println("Balance Finish"); // TODO: Remove test statement
+      // System.out.println("Balance Finish"); // TODO: Remove test statement
     }
   }
-  
+
   private AvlNode rotateLeft(AvlNode node) {
     AvlNode v = node.getRight();
     v.setParent(node.getParent());
     node.setRight(v.getLeft());
-    
-    if(node.getRight() != null)
+
+    if (node.getRight() != null)
       node.getRight().setParent(node);
-    
+
     v.setLeft(node);
     node.setParent(v);
-    
-    if(v.getParent() != null) {
-      if(v.getParent().getRight() == node) {
+
+    if (v.getParent() != null) {
+      if (v.getParent().getRight() == node) {
         v.getParent().setRight(v);
       } else if (v.getParent().getLeft() == node) {
         v.getParent().setLeft(v);
@@ -84,23 +157,23 @@ public class AvlTree {
     }
     setBalance(node);
     setBalance(v);
-    
+
     return v;
   }
-  
+
   private AvlNode rotateRight(AvlNode node) {
     AvlNode v = node.getLeft();
     v.setParent(node.getParent());
     node.setLeft(v.getRight());
-    
-    if(node.getLeft() != null)
+
+    if (node.getLeft() != null)
       node.getLeft().setParent(node);
-    
+
     v.setRight(node);
     node.setParent(v);
-    
-    if(v.getParent() != null) {
-      if(v.getParent().getRight() == node) {
+
+    if (v.getParent() != null) {
+      if (v.getParent().getRight() == node) {
         v.getParent().setRight(v);
       } else if (v.getParent().getLeft() == node) {
         v.getParent().setLeft(v);
@@ -108,15 +181,15 @@ public class AvlTree {
     }
     setBalance(node);
     setBalance(v);
-    
+
     return v;
   }
-  
+
   private AvlNode doubleRotateLeftRight(AvlNode node) {
     node.setLeft(rotateLeft(node.getLeft()));
     return rotateRight(node);
   }
-  
+
   private AvlNode doubleRotateRightLeft(AvlNode node) {
     node.setRight(rotateRight(node.getRight()));
     return rotateLeft(node);
@@ -141,7 +214,7 @@ public class AvlTree {
       return p;
     }
   }
-  
+
   private int height(AvlNode node) {
     if (node == null)
       return -1;
@@ -153,15 +226,15 @@ public class AvlTree {
       return 1 + height(node.getLeft());
     return 1 + Math.max(height(node.getLeft()), height(node.getRight()));
   }
-  
+
   private void setBalance(AvlNode node) {
     node.setBalance(height(node.getRight()) - height(node.getLeft()));
   }
-  
+
   public void inOrderPrint() {
     inOrderPrintRecur(root);
   }
-  
+
   private void inOrderPrintRecur(AvlNode node) {
     if (node == null)
       return;
