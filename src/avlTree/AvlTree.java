@@ -3,6 +3,8 @@
  */
 package avlTree;
 
+import java.util.ArrayList;
+
 /**
  * @author grahamw0
  *
@@ -241,6 +243,52 @@ public class AvlTree {
     inOrderPrintRecur(node.getLeft());
     System.out.println(node);
     inOrderPrintRecur(node.getRight());
+  }
+
+  public AvlNode getRoot() {
+    return root;
+  }
+
+  /** WEIRD FUNCTIONS FROM INSTRUCTIONS **/
+  public boolean search(AvlTree tree, Comparable data) {
+    return tree.search(tree.root, data) != null;
+  }
+
+  public AvlTree insert(AvlTree tree, Comparable data) {
+    if (tree.search(tree.root, data) != null) // Tree already contains data
+      return tree;
+    tree.insert(data);
+    return tree;
+  }
+
+  public AvlTree delete(AvlTree tree, Comparable data) {
+    tree.remove(data);
+    return tree;
+  }
+
+  public ArrayList<Comparable> inOrder(AvlTree tree) {
+    ArrayList<Comparable> list = new ArrayList<>();
+    inOrderRecurs(list, tree.root);
+    return list;
+  }
+
+  private void inOrderRecurs(ArrayList<Comparable> list, AvlNode node) {
+    if (node == null)
+      return;
+    inOrderRecurs(list, node.getLeft());
+    list.add(node.getData());
+    inOrderRecurs(list, node.getRight());
+  }
+
+  public int count(AvlTree tree, Comparable x0, Comparable x1) {
+    int count = 0;
+    ArrayList<Comparable> list = tree.inOrder(tree);
+    for(Comparable c : list) {
+      if(c.compareTo(x0) > 0 && c.compareTo(x1) < 0)
+        count++;
+    }
+    
+    return count;
   }
 
 }
