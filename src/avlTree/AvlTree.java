@@ -250,29 +250,29 @@ public class AvlTree {
   }
 
   /** WEIRD FUNCTIONS FROM INSTRUCTIONS **/
-  public boolean search(AvlTree tree, Comparable data) {
+  public static boolean search(AvlTree tree, Comparable data) {
     return tree.search(tree.root, data) != null;
   }
 
-  public AvlTree insert(AvlTree tree, Comparable data) {
+  public static AvlTree insert(AvlTree tree, Comparable data) {
     if (tree.search(tree.root, data) != null) // Tree already contains data
       return tree;
     tree.insert(data);
     return tree;
   }
 
-  public AvlTree delete(AvlTree tree, Comparable data) {
+  public static AvlTree delete(AvlTree tree, Comparable data) {
     tree.remove(data);
     return tree;
   }
 
-  public ArrayList<Comparable> inOrder(AvlTree tree) {
+  public static ArrayList<Comparable> inOrder(AvlTree tree) {
     ArrayList<Comparable> list = new ArrayList<>();
-    inOrderRecurs(list, tree.root);
+    AvlTree.inOrderRecurs(list, tree.root);
     return list;
   }
 
-  private void inOrderRecurs(ArrayList<Comparable> list, AvlNode node) {
+  private static void inOrderRecurs(ArrayList<Comparable> list, AvlNode node) {
     if (node == null)
       return;
     inOrderRecurs(list, node.getLeft());
@@ -280,13 +280,13 @@ public class AvlTree {
     inOrderRecurs(list, node.getRight());
   }
 
-  public int count(AvlTree tree, Comparable x0, Comparable x1) {
+  public static int count(AvlTree tree, Comparable x0, Comparable x1) {
     if(x0.compareTo(x1) > 0)  // If lower bound is larger than upper
       return 0;
     return countRecur(tree.root, x0, x1);
   }
 
-  private int countRecur(AvlNode node, Comparable x0, Comparable x1) {
+  private static int countRecur(AvlNode node, Comparable x0, Comparable x1) {
     if (node == null)
       return 0;
     if ((node.getData().compareTo(x0) > 0 && node.getData().compareTo(x1) < 0)
@@ -298,5 +298,4 @@ public class AvlTree {
       return countRecur(node.getLeft(), x0, x1);
     }
   }
-
 }
