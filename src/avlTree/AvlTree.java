@@ -295,7 +295,8 @@ public class AvlTree {
   private int countRecur(AvlNode node, Comparable x0, Comparable x1) {
     if (node == null)
       return 0;
-    if (node.getData().compareTo(x0) > 0 && node.getData().compareTo(x1) < 0) {
+    if ((node.getData().compareTo(x0) > 0 && node.getData().compareTo(x1) < 0)
+        || node.getData().compareTo(x0) == 0 || node.getData().compareTo(x1) == 0) {
       return 1 + countRecur(node.getLeft(), x0, x1) + countRecur(node.getRight(), x0, x1);
     } else if (node.getData().compareTo(x0) < 0) {
       return countRecur(node.getRight(), x0, x1);
