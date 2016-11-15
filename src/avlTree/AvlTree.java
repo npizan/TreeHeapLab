@@ -280,15 +280,9 @@ public class AvlTree {
     inOrderRecurs(list, node.getRight());
   }
 
-  /*
-   * public int count(AvlTree tree, Comparable x0, Comparable x1) { int count = 0;
-   * ArrayList<Comparable> list = tree.inOrder(tree); for(Comparable c : list) { if(c.compareTo(x0)
-   * > 0 && c.compareTo(x1) < 0) count++; }
-   * 
-   * return count; }
-   */
-
   public int count(AvlTree tree, Comparable x0, Comparable x1) {
+    if(x0.compareTo(x1) > 0)  // If lower bound is larger than upper
+      return 0;
     return countRecur(tree.root, x0, x1);
   }
 
