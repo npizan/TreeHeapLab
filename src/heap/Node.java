@@ -1,6 +1,8 @@
 package heap;
 
-
+/**
+ * Supplied Node for the Heap implementation
+ */
 public class Node {
   private Node left_child;
   private Node right_child;
