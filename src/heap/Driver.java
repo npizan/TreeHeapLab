@@ -5,7 +5,7 @@ import java.util.Random;
 public class Driver {
 
   public static void main(String[] args) {
-    Random rand = new Random();
+    Random rand = new Random(666);
     
     Heap heap = new Heap();
     heap.makeHeap(rand.nextInt(200));
