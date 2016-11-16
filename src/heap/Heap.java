@@ -1,6 +1,3 @@
-/**
- * 
- */
 package heap;
 
 import java.util.LinkedList;
@@ -8,17 +5,20 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * @author grahamw0
+ * Implementation of a min-heap.
+ * 
+ * @author Ryan Godfrey, Will Graham
  *
  */
 public class Heap implements MyHeap {
   private int size;
   private Node root;
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Method that stands in for a constructor.
    * 
-   * @see heap.MyHeap#makeHeap(java.lang.Comparable)
+   * @param value The data to be held by the first node in the new heap
+   * @return The root of the new heap
    */
   @Override
   public Node makeHeap(Comparable value) {
@@ -27,20 +27,21 @@ public class Heap implements MyHeap {
     return root;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Checks if heap is empty (no nodes).
    * 
-   * @see heap.MyHeap#isEmpty()
+   * @return Whether the heap is empty or not
    */
   @Override
   public boolean isEmpty() {
     return size == 0;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Inserts a node into the heap, then sifts up from the insert position.
    * 
-   * @see heap.MyHeap#insert(java.lang.Comparable)
+   * @param value The data to be inserted into the heap
+   * @return Whether the insertion is successful or not (it will always be)
    */
   @Override
   public boolean insert(Comparable value) {
@@ -61,17 +62,17 @@ public class Heap implements MyHeap {
     return true;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Removes the minimum value (root) of the heap.
    * 
-   * @see heap.MyHeap#deleteMin()
+   * @return Whether the delete is successful or not (only fails if heap is empty)
    */
   @Override
   public boolean deleteMin() {
     if (root == null) {
       return false;
     }
-    if(size == 1) {
+    if (size == 1) {
       root = null;
       size--;
       return true;
@@ -93,10 +94,13 @@ public class Heap implements MyHeap {
     return true;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Decreases a given node's value to supplied value, if and only if that value is smaller than the
+   * node's existing value.
    * 
-   * @see heap.MyHeap#decreaseKey(heap.Node, java.lang.Comparable)
+   * @param key The node to be updated
+   * @param updateValue The new value for the node
+   * @return Whether the node's value is decreased or not
    */
   @Override
   public boolean decreaseKey(Node key, Comparable updateValue) {
@@ -109,10 +113,11 @@ public class Heap implements MyHeap {
     }
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Removes a given node from the heap.
    * 
-   * @see heap.MyHeap#delete(heap.Node)
+   * @param del The node to be deleted
+   * @return Whether the node was found and deleted or not
    */
   @Override
   public boolean delete(Node del) {
@@ -132,10 +137,11 @@ public class Heap implements MyHeap {
     return true;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Unions (merges) the supplied heap into the current heap via repeated insertion.
    * 
-   * @see heap.MyHeap#union(heap.MyHeap)
+   * @param heap The heap to union into the current heap
+   * @return Whether the union was successful (always true)
    */
   @Override
   public boolean union(MyHeap heap) {
@@ -147,10 +153,10 @@ public class Heap implements MyHeap {
 
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Returns the minimum value (root) of the heap, or null if empty.
    * 
-   * @see heap.MyHeap#findMin()
+   * @return The most minimum value in the heap, or null if the heap is empty
    */
   @Override
   public Comparable findMin() {
@@ -161,9 +167,10 @@ public class Heap implements MyHeap {
   }
 
   /**
-   * Returns parent of open space to add/remove from (remove?)
+   * Finds the parent of the next space available to insert. Path found via analyzing the binary
+   * representation of the heap size.
    * 
-   * @return
+   * @return The node which will be the parent of the next insert
    */
   private Node getInsertParent() {
     String bin = Integer.toBinaryString(size + 1);
@@ -181,6 +188,12 @@ public class Heap implements MyHeap {
 
   }
 
+  /**
+   * Finds the last insert position; the right-most child of the last level. Used for swapping in
+   * removal methods.
+   * 
+   * @return The node in the "last inserted" position
+   */
   private Node getLast() {
     String bin = Integer.toBinaryString(size);
     bin = bin.substring(1);
@@ -196,6 +209,11 @@ public class Heap implements MyHeap {
     return current;
   }
 
+  /**
+   * Maintains the heap property in an upwards direction, starting at the passed node.
+   * 
+   * @param n The node at which to start the sifting up
+   */
   private void siftUp(Node n) {
     Node current = n;
     while (current != root && current.getData().compareTo(current.getParent().getData()) <= 0) {
@@ -204,6 +222,12 @@ public class Heap implements MyHeap {
     }
   }
 
+  /**
+   * Moves a given node's value down tree to appropriate position so that the heap property is
+   * maintained. Used in delete operations.
+   * 
+   * @param n Node at which to start the sifting
+   */
   private void siftDown(Node n) {
     Node current = n;
     boolean continueSift = true;
