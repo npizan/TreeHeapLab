@@ -1,29 +1,28 @@
 package heap;
 
+import java.util.Random;
+
 public class Driver {
 
   public static void main(String[] args) {
-    Heap heap1 = new Heap();
-    heap1.makeHeap(6);
-    heap1.insert(12);
-    heap1.insert(7);
-    heap1.insert(8);
-    heap1.insert(10);
-    heap1.insert(666);
-    //heap1.print();
-    /*heap1.insert(23);
-    heap1.insert(74);
-    heap1.insert(2389);
-    heap1.print();*/
+    Random rand = new Random();
     
+    Heap heap = new Heap();
+    heap.makeHeap(rand.nextInt(200));
     Heap heap2 = new Heap();
-    heap2.makeHeap(2389);
-    heap2.insert(74);
-    heap2.insert(23);
-    //heap2.print();
+    heap2.makeHeap(rand.nextInt(200));
+    for(int i = 0; i < 9; i++) {
+      heap.insert(rand.nextInt(200));
+      heap2.insert(rand.nextInt(200));
+    }
+    heap.print();
+    System.out.println();
+    heap2.print();
+    System.out.println();
     
-    heap1.union(heap2);
-    heap1.print();
+    heap.union(heap2);
+    heap.print();
+    
   }
 
 }
