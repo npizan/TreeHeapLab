@@ -2,7 +2,6 @@ package heap;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * Implementation of a min-heap.
@@ -194,7 +193,7 @@ public class Heap implements MyHeap {
    * 
    * @return The node in the "last inserted" position
    */
-  public Node getLast() {
+  private Node getLast() {
     String bin = Integer.toBinaryString(size);
     bin = bin.substring(1);
 
