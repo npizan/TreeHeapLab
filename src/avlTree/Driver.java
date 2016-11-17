@@ -1,10 +1,11 @@
-/**
- * 
- */
 package avlTree;
 
+import java.util.Random;
+
 /**
- * @author grahamw0
+ * Driver for AVL Tree.
+ * 
+ * @author Ryan Godfrey, William Graham
  *
  */
 public class Driver {
@@ -13,13 +14,12 @@ public class Driver {
    * @param args
    */
   public static void main(String[] args) {
+    Random rand = new Random(666);
     
     AvlTree tree = new AvlTree();
-    AvlTree.insert(tree, 666);
-    AvlTree.insert(tree, 5);
-    AvlTree.insert(tree, 240);
-    
-    AvlTree.delete(tree, 666);
+    for(int i = 0; i < 10; i++) {
+      tree.insert(rand.nextInt(100));
+    }
     
     for(Comparable c : AvlTree.inOrder(tree)) {
       System.out.println(c);
