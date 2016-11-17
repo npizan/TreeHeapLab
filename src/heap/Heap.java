@@ -177,7 +177,7 @@ public class Heap implements MyHeap {
     bin = bin.substring(1, bin.length() - 1);
 
     Node current = root;
-    for (int i = bin.length() - 1; i >= 0; i--) {
+    for (int i = 0; i < bin.length(); i++) {
       if (bin.charAt(i) == '0') {
         current = current.getLeftChild();
       } else {
@@ -194,7 +194,7 @@ public class Heap implements MyHeap {
    * 
    * @return The node in the "last inserted" position
    */
-  private Node getLast() {
+  public Node getLast() {
     String bin = Integer.toBinaryString(size);
     bin = bin.substring(1);
 
@@ -292,6 +292,7 @@ public class Heap implements MyHeap {
       if (node.getRightChild() != null)
         queue.add(node.getRightChild());
     }
+    System.out.println();
 
   }
 
