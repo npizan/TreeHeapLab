@@ -28,7 +28,7 @@ public class AvlTree {
   }
 
   /**
-   * Recursive insert method. Compares a node in the tree to the new node to either set set the new
+   * Recursive insert method. Compares a node in the tree to the new node to either set the new
    * node as a child of the current, or to recurse and move within the tree. The balancing method is
    * then called.
    * 
@@ -412,7 +412,7 @@ public class AvlTree {
   /**
    * Recursive component of count().
    * 
-   * @param node Current node being looked at (intial call should be on root)
+   * @param node Current node being looked at (initial call should be on root)
    * @param x0 Lower bound
    * @param x1 Upper bound
    * @return Running total of values between x0 and x1 (inclusive)
